@@ -44,6 +44,11 @@ set nocompatible               " be iMproved
  " Text settings
  syntax enable
  colors badwolf
+ set number
+ set nowrap
+ set colorcolumn=80
+ set hlsearch
+ set list listchars=trail:.
  "set guifont=Consolas:h21
 
  "Ctrl+p stuff
