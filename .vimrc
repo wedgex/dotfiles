@@ -39,7 +39,7 @@ set nocompatible               " be iMproved
  " NOTE: comments after Bundle command are not allowed..
  
  " Spacing related settings
- set softtabstop=2 tabstop=2 shiftwidth=2 smarttab smartindent
+ set softtabstop=2 tabstop=2 shiftwidth=2 smarttab smartindent expandtab
 
  " Text settings
  syntax enable
