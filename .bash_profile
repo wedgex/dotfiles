@@ -84,3 +84,4 @@ parse_git_branch() {
 }
 
 export PS1="$On_Red\u$Color_Off $Green$PathShort $Yellow\$(parse_git_branch)$Color_Off ⚡  "
+eval "$(rbenv init -)"
