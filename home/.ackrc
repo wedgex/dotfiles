@@ -1,0 +1,5 @@
+--color
+
+--type-add=css=scss=sass
+--type-add=haml=slim
+--type-add=html=.html.erb.hbs.handlebars

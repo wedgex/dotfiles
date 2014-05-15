@@ -85,3 +85,9 @@ parse_git_branch() {
 
 export PS1="$On_Red\u$Color_Off $Green$PathShort $Yellow\$(parse_git_branch)$Color_Off ⚡  "
 eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+[[ -s /Users/hunter/.nvm/nvm.sh ]] && . /Users/hunter/.nvm/nvm.sh # This loads NVM
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

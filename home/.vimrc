@@ -17,10 +17,15 @@ set nocompatible               " be iMproved
   Bundle 'kien/ctrlp.vim'
   Bundle 'flazz/vim-colorschemes'
   Bundle 'tpope/vim-rails'
-	Bundle 'mileszs/ack.vim'
-	Bundle 'slim-template/vim-slim'
+  Bundle 'tpope/vim-bundler'
+  Bundle 'mileszs/ack.vim'
+  Bundle 'slim-template/vim-slim'
+  Bundle 'thoughtbot/vim-rspec'
+  Bundle 'mustache/vim-mustache-handlebars'
+  Bundle 'skalnik/vim-vroom'
+  Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
  " vim-scripts repos
-" Bundle 'L9'
+ " Bundle 'L9'
  " non github repos
  " Bundle 'git://git.wincent.com/command-t.git'
  " git repos on your local machine (ie. when working on your own plugin)
@@ -63,6 +68,9 @@ set nocompatible               " be iMproved
 
  " Ack
  map <c-F> :Ack<space>
+
+" specs
+map <Leader>s :call RunCurrentSpecFile()<CR>
 
  " Navigation
 nnoremap <S-j> <C-d> 
