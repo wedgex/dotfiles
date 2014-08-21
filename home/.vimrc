@@ -1,78 +1,62 @@
 set nocompatible               " be iMproved
- filetype off                   " required!
+filetype off                   " required!
 
- set rtp+=~/.vim/bundle/vundle/
- call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
- " let Vundle manage Vundle
- " required! 
- Bundle 'gmarik/vundle'
+" let Vundle manage Vundle
+" required! 
+Plugin 'gmarik/vundle'
 
- " My Bundles here:
- "
- " original repos on github
-  Bundle 'tpope/vim-fugitive'
-  Bundle 'scrooloose/nerdcommenter'
-  Bundle 'scrooloose/nerdtree'
-  Bundle 'kien/ctrlp.vim'
-  Bundle 'flazz/vim-colorschemes'
-  Bundle 'tpope/vim-rails'
-  Bundle 'tpope/vim-bundler'
-  Bundle 'mileszs/ack.vim'
-  Bundle 'slim-template/vim-slim'
-  Bundle 'thoughtbot/vim-rspec'
-  Bundle 'mustache/vim-mustache-handlebars'
-  Bundle 'skalnik/vim-vroom'
-  Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
- " vim-scripts repos
- " Bundle 'L9'
- " non github repos
- " Bundle 'git://git.wincent.com/command-t.git'
- " git repos on your local machine (ie. when working on your own plugin)
- " Bundle 'file:///Users/gmarik/path/to/plugin'
- " ...
+" My Bundles here:
+"
+" original repos on github
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-bundler'
+Plugin 'mileszs/ack.vim'
+Plugin 'slim-template/vim-slim'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'skalnik/vim-vroom'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
- filetype plugin indent on     " required!
- "
- " Brief help
- " :BundleList          - list configured bundles
- " :BundleInstall(!)    - install(update) bundles
- " :BundleSearch(!) foo - search(or refresh cache first) for foo
- " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
- "
- " see :h vundle for more details or wiki for FAQ
- " NOTE: comments after Bundle command are not allowed..
- 
- " Spacing related settings
- set softtabstop=2 tabstop=2 shiftwidth=2 smarttab smartindent expandtab
+call vundle#end()
 
- " Text settings
- syntax enable
- colors badwolf
- set number
- set nowrap
- set colorcolumn=80
- set hlsearch
- set list listchars=trail:.
- "set guifont=Consolas:h21
+filetype plugin indent on     " required!
+set softtabstop=2 tabstop=2 shiftwidth=2 smarttab smartindent expandtab
 
- "Ctrl+p stuff
- let g:ctrlp_max_files = 0
- let g:ctrlp_max_depth = 100
- let g:ctrlp_working_path_mode = 'raw'
- let g:ctrlp_root_markers = ['.git']
- let g:ctrlp_map = '<Leader>t'
+" Text settings
+syntax enable
+colors badwolf
+set number
+set nowrap
+set colorcolumn=80
+set hlsearch
+set list listchars=trail:.
+"set guifont=Consolas:h21
 
- " Nerdtree
- map <Leader>n :NERDTreeToggle<CR>
+"Ctrl+p stuff
+let g:ctrlp_max_files = 0
+let g:ctrlp_max_depth = 100
+let g:ctrlp_working_path_mode = 'raw'
+let g:ctrlp_root_markers = ['.git']
+let g:ctrlp_map = '<Leader>t'
 
- " Ack
- map <c-F> :Ack<space>
+" Nerdtree
+map <Leader>n :NERDTreeToggle<CR>
+
+" Ack
+map <c-F> :Ack<space>
 
 " specs
 map <Leader>s :call RunCurrentSpecFile()<CR>
 
- " Navigation
+" Navigation
 nnoremap <S-j> <C-d> 
 nnoremap <S-k> <C-u> 
 
