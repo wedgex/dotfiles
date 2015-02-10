@@ -24,21 +24,25 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'skalnik/vim-vroom'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'fatih/vim-go'
+Plugin 'sickill/vim-sunburst'
+Plugin 'duythinht/vim-coffee'
 
 call vundle#end()
 
 filetype plugin indent on     " required!
 set softtabstop=2 tabstop=2 shiftwidth=2 smarttab smartindent expandtab
 
-" Text settings
-syntax enable
-colors badwolf
-set number
-set nowrap
-set colorcolumn=80
-set hlsearch
-set list listchars=trail:.
-"set guifont=Consolas:h21
+ " Text settings
+ syntax enable
+ colorscheme coffee
+ set number
+ set nowrap
+ set colorcolumn=80
+ set hlsearch
+ set list listchars=trail:.
+ set noswapfile
+ "set guifont=Consolas:h21
 
 "Ctrl+p stuff
 let g:ctrlp_max_files = 0
