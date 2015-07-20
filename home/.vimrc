@@ -15,7 +15,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
-Plugin 'flazz/vim-colorschemes'
+Plugin 'zsoltf/vim-maui'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
 Plugin 'mileszs/ack.vim'
@@ -25,7 +25,6 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'skalnik/vim-vroom'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'fatih/vim-go'
-Plugin 'sickill/vim-sunburst'
 Plugin 'duythinht/vim-coffee'
 
 call vundle#end()
@@ -35,7 +34,7 @@ set softtabstop=2 tabstop=2 shiftwidth=2 smarttab smartindent expandtab
 
  " Text settings
  syntax enable
- colorscheme coffee
+ colorscheme maui
  set number
  set nowrap
  set colorcolumn=80
