@@ -82,6 +82,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias tmux="tmux -2"
+
+export TERM="xterm-256color"
 
 if [ -f /Users/hhaydel/.idg_profile ]; then . /Users/hhaydel/.idg_profile; fi
 
