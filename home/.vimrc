@@ -25,7 +25,8 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'skalnik/vim-vroom'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'fatih/vim-go'
-Plugin 'duythinht/vim-coffee'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 
@@ -41,7 +42,6 @@ set softtabstop=2 tabstop=2 shiftwidth=2 smarttab smartindent expandtab
  set hlsearch
  set list listchars=trail:.
  set noswapfile
- "set guifont=Consolas:h21
 
 "Ctrl+p stuff
 let g:ctrlp_max_files = 0
@@ -50,14 +50,25 @@ let g:ctrlp_working_path_mode = 'raw'
 let g:ctrlp_root_markers = ['.git']
 let g:ctrlp_map = '<Leader>t'
 
+"The Silver Searcher
+if executable('ag')
+  let g:ackprg = 'ag --nogroup --nocolor --column'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_use_caching = 0
+end
+
 " Nerdtree
 map <Leader>n :NERDTreeToggle<CR>
 
-" Ack
-map <c-F> :Ack<space>
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-" specs
-map <Leader>s :call RunCurrentSpecFile()<CR>
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Navigation
 nnoremap <S-j> <C-d> 

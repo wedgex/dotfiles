@@ -53,9 +53,6 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/Users/hhaydel/.avn/bin:/Users/hhaydel/.avn/bin:/Users/hhaydel/.nvm/versions/node/v0.12.0/bin:/Users/hhaydel/.gem/ruby/2.1.3/bin:/Users/hhaydel/.rubies/ruby-2.1.3/lib/ruby/gems/2.1.0/bin:/Users/hhaydel/.rubies/ruby-2.1.3/bin:./node_modules/.bin:.bundle/binstubs:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/hhaydel/source/idg/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -83,9 +80,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias tmux="tmux -2"
+alias be="bundle exec"
 
 export TERM="xterm-256color"
+export EDITOR='vim'
 
 if [ -f /Users/hhaydel/.idg_profile ]; then . /Users/hhaydel/.idg_profile; fi
 
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
