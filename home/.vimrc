@@ -29,6 +29,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'scrooloose/syntastic'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'tpope/vim-surround'
 
 call vundle#end()
 
