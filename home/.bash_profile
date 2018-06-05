@@ -89,9 +89,3 @@ eval "$(rbenv init -)"
 
 [[ -s /Users/hunter/.nvm/nvm.sh ]] && . /Users/hunter/.nvm/nvm.sh # This loads NVM
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
-export DOCKER_HOST=tcp://192.168.59.103:2375
-export JAVA_HOME=$(/usr/libexec/java_home)
