@@ -89,3 +89,5 @@ if [ -f /Users/hhaydel/.idg_profile ]; then . /Users/hhaydel/.idg_profile; fi
 [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
