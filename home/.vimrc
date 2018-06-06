@@ -2,6 +2,7 @@ set nocompatible               " be iMproved
 filetype off                   " required!
 
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.fzf
 call vundle#begin()
 
 " let Vundle manage Vundle
@@ -14,11 +15,11 @@ Plugin 'gmarik/vundle'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
 Plugin 'zsoltf/vim-maui'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 
@@ -35,12 +36,8 @@ set softtabstop=2 tabstop=2 shiftwidth=2 smarttab smartindent expandtab
  set list listchars=trail:.
  set noswapfile
 
-"Ctrl+p stuff
-let g:ctrlp_max_files = 0
-let g:ctrlp_max_depth = 100
-let g:ctrlp_working_path_mode = 'raw'
-let g:ctrlp_root_markers = ['.git']
-let g:ctrlp_map = '<Leader>t'
+ " fzf
+ nmap <leader>t :Files<CR>
 
 "The Silver Searcher
 if executable('ag')
