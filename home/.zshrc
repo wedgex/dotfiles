@@ -81,13 +81,15 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias be="bundle exec"
 
+alias vim="nvim"
+
 export TERM="xterm-256color"
 export EDITOR='vim'
 
-if [ -f /Users/hhaydel/.idg_profile ]; then . /Users/hhaydel/.idg_profile; fi
 
-[[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh" # load avn
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
