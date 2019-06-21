@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+DIR=$(dirname ${BASH_SOURCE[0]})
+
+ln -sv $DIR/.zshrc ~
+ln -sv $DIR/.oh-my-zsh ~
+ln -sv $DIR/.config ~
