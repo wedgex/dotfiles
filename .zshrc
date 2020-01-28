@@ -102,14 +102,14 @@ alias be="bundle exec"
 
 alias vim="nvim"
 
+export PATH=$PATH:/usr/local/bin
+
 export TERM="xterm-256color"
 export EDITOR='vim'
 
+[ -s "$HOME/.asdf/asdf.sh" ] && \. "$HOME/.asdf/asdf.sh" # This loads asdf
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
+export PATH=$HOME/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
