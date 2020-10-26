@@ -7,11 +7,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'altercation/vim-colors-solarized'
-Plug 'posva/vim-vue'
-Plug 'slim-template/vim-slim'
-Plug 'leafgarland/typescript-vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dracula/vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'prettier/vim-prettier'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -23,8 +22,12 @@ set number
 set list listchars=trail:.
 syntax enable
 set background=dark
+
+" automatically try and add js extensions for gf on relative paths
+set suffixesadd=.js,.jsx
+
 "colorscheme solarized
-colorscheme dracula
+colorscheme ayu
 
 nnoremap <S-j> <C-d>
 nnoremap <S-k> <C-u>
@@ -36,6 +39,7 @@ nnoremap <C-l> <C-w>l
 " ag / ack
 if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
+  let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
 end
 
 " fzf
@@ -47,18 +51,21 @@ map <leader>n :NERDTreeToggle<cr>
 " vim-vue
 let g:vue_disable_pre_processors=1
 
+let g:ale_rust_rls_config = { 'rust': { 'clippy_preference': 'on' } }
+
 " ale linting & fixing
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint'],
-      \ 'ruby': ['rubocop']
+      \ 'ruby': ['rubocop'],
+      \ 'jsx': ['stylelint', 'eslint']
       \}
 
-let g:ale_fixers = { 'typescript': ['prettier', 'eslint'], 'javascript': ['prettier', 'eslint'], 'ruby': ['rufo', 'rubocop'], 'vue': ['prettier', 'eslint'] }
+let g:ale_fixers = { 'typescript': ['eslint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'jsx': ['stylelint', 'eslint'], 'rust': ['rustfmt'] }
 let g:ale_fix_on_save = 1
 
 " coc autocompletion
-let g:coc_global_extensions = ['coc-solargraph', 'coc-tsserver', 'coc-json', 'coc-vetur', 'coc-yaml', 'coc-css', 'coc-html']
+let g:coc_global_extensions = ['coc-solargraph', 'coc-tsserver', 'coc-json', 'coc-yaml', 'coc-css', 'coc-html', 'coc-rls']
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
