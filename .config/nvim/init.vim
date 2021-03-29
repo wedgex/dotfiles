@@ -11,6 +11,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ayu-theme/ayu-vim'
 Plug 'prettier/vim-prettier'
 Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
+" Plug 'sentientmonkey/vim-flog'
+" Plug 'leroyg/vim-flay'
 
 call plug#end()
 
@@ -57,7 +60,7 @@ let g:ale_rust_rls_config = { 'rust': { 'clippy_preference': 'on' } }
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
       \ 'typescript': ['eslint'],
-      \ 'ruby': ['rubocop'],
+      \ 'ruby': ['rubocop', 'reek'],
       \ 'jsx': ['stylelint', 'eslint']
       \}
 
@@ -65,7 +68,16 @@ let g:ale_fixers = { 'typescript': ['eslint'], 'javascript': ['eslint'], 'ruby':
 let g:ale_fix_on_save = 1
 
 " coc autocompletion
-let g:coc_global_extensions = ['coc-solargraph', 'coc-tsserver', 'coc-json', 'coc-yaml', 'coc-css', 'coc-html', 'coc-rls']
+let g:coc_global_extensions = ['coc-solargraph', 'coc-tsserver', 'coc-json', 'coc-yaml', 'coc-css', 'coc-html']
+
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
