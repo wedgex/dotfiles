@@ -5,13 +5,14 @@ Plug 'w0rp/ale'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ayu-theme/ayu-vim'
 Plug 'prettier/vim-prettier'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
 " Plug 'sentientmonkey/vim-flog'
 " Plug 'leroyg/vim-flay'
 
@@ -32,8 +33,8 @@ set suffixesadd=.js,.jsx
 "colorscheme solarized
 colorscheme ayu
 
-nnoremap <S-j> <C-d>
-nnoremap <S-k> <C-u>
+nnoremap <S-j> <C-f>
+nnoremap <S-k> <C-b>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -49,7 +50,22 @@ end
 nmap <leader>t :Files<cr>
 
 " nerdtree
-map <leader>n :NERDTreeToggle<cr>
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+function ToggleNERDTree()
+  if exists('b:NERDTree') && b:NERDTree.isTabTree()
+    :NERDTreeToggle
+  else
+    :NERDTreeFind
+  endif
+
+endfunction
+
+map <leader>n :call ToggleNERDTree()<cr>
 
 " vim-vue
 let g:vue_disable_pre_processors=1
@@ -101,3 +117,6 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 
 command Pretty execute "!rbprettier --write %"
+
+command Test execute "tabnew % | term yarn test %"
+command Rspec execute "tabnew % | term c rspec %"
