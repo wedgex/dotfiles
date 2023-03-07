@@ -256,7 +256,7 @@ vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
 local toggle_nerd_tree =  function()
-  if vim.fn.exists('g:NERDTree') and vim.api.nvim_eval('g:NERDTree.IsOpen()') then
+  if vim.fn.exists('g:NERDTree') and vim.api.nvim_eval('g:NERDTree.IsOpen()') == 1 then
     vim.cmd('NERDTreeToggle')
   elseif vim.fn.expand('%') then
     vim.cmd('NERDTreeFind')
@@ -567,7 +567,7 @@ lint.linters_by_ft = {
   ruby = { 'rubocop' }
 }
 
-vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "TextChangedI", "BufWritePost", "BufEnter", "BufWinEnter" }, {
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChangedI", "BufWritePost", "BufEnter", "BufWinEnter" }, {
   callback = function()
     require("lint").try_lint()
   end,
