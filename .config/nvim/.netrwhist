@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/h.haydel/workspace/calendly'
+let g:netrw_dirhist_5='/Users/h.haydel/workspace/interview-take-homes/laurette-siler'
+let g:netrw_dirhist_4='/Users/h.haydel/workspace/calendly/js-packages/http-tools/src/query'
+let g:netrw_dirhist_3='/Users/h.haydel/workspace/calendly'
+let g:netrw_dirhist_2='/Users/h.haydel/workspace/slackline'
+let g:netrw_dirhist_1='/Users/h.haydel/workspace/calendly'
+let g:netrw_dirhist_0='/Users/h.haydel/workspace/calendly/.git/info'
+let g:netrw_dirhist_9='/Users/h.haydel/workspace/calendly'
+let g:netrw_dirhist_8='/Users/h.haydel/workspace/calendly/js-packages/form/src/raw'
+let g:netrw_dirhist_7='/Users/h.haydel/workspace/calendly/js-packages/routing-form-landing/src/form_inputs'

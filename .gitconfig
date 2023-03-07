@@ -1,5 +1,13 @@
 [user]
-	email = haydh530@gmail.com
+	email = h.haydel@calendly.com
 	name = Hunter Haydel
 [core]
 	editor = vim
+	excludesfile = /Users/h.haydel/.gitignore
+[push]
+	default = current
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

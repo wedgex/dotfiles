@@ -7,12 +7,13 @@ Plug 'junegunn/fzf.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'altercation/vim-colors-solarized'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ayu-theme/ayu-vim'
 Plug 'prettier/vim-prettier'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
+Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'sentientmonkey/vim-flog'
 " Plug 'leroyg/vim-flay'
 
@@ -26,12 +27,15 @@ set number
 set list listchars=trail:.
 syntax enable
 set background=dark
+set mouse=nv
 
 " automatically try and add js extensions for gf on relative paths
 set suffixesadd=.js,.jsx
 
-"colorscheme solarized
+let ayucolor="dark"
 colorscheme ayu
+
+nnoremap Y Y
 
 nnoremap <S-j> <C-f>
 nnoremap <S-k> <C-b>
@@ -43,7 +47,7 @@ nnoremap <C-l> <C-w>l
 " ag / ack
 if executable('ag')
   let g:ackprg = 'ag --nogroup --nocolor --column'
-  let $FZF_DEFAULT_COMMAND = 'ag --hidden -g ""'
+  let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 end
 
 " fzf
@@ -57,12 +61,11 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 function ToggleNERDTree()
-  if exists('b:NERDTree') && b:NERDTree.isTabTree()
-    :NERDTreeToggle
+  if exists('b:NERDTree') && b:NERDTree.ExistsForTab() && b:NERDTree.IsOpen()
+    :NERDTreeClose
   else
     :NERDTreeFind
   endif
-
 endfunction
 
 map <leader>n :call ToggleNERDTree()<cr>
@@ -83,40 +86,63 @@ let g:ale_linters = {
 let g:ale_fixers = { 'typescript': ['eslint'], 'javascript': ['eslint'], 'ruby': ['rubocop'], 'jsx': ['stylelint', 'eslint'], 'rust': ['rustfmt'] }
 let g:ale_fix_on_save = 1
 
-" coc autocompletion
-let g:coc_global_extensions = ['coc-solargraph', 'coc-tsserver', 'coc-json', 'coc-yaml', 'coc-css', 'coc-html']
+"" coc autocompletion
+"let g:coc_global_extensions = ['coc-solargraph', 'coc-tsserver', 'coc-json', 'coc-yaml', 'coc-css', 'coc-html']
 
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
+"xmap <leader>a  <Plug>(coc-codeaction-selected)
+"nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+"nmap <silent> gd <Plug>(coc-definition)
+"nmap <silent> gy <Plug>(coc-type-definition)
+"nmap <silent> gi <Plug>(coc-implementation)
+"nmap <silent> gr <Plug>(coc-references)
+
+"" Use leader k to show documentation in preview window.
+"nnoremap <leader>k :call <SID>show_documentation()<CR>
+
+"function! s:show_documentation()
+  "if (index(['vim','help'], &filetype) >= 0)
+    "execute 'h '.expand('<cword>')
+  "elseif (coc#rpc#ready())
+    "call CocActionAsync('doHover')
+  "else
+    "execute '!' . &keywordprg . " " . expand('<cword>')
+  "endif
+"endfunction
 
 
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+"inoremap <silent><expr> <TAB>
+      "\ coc#pum#visible() ? coc#pum#next(1) :
+      "\ CheckBackspace() ? "\<Tab>" :
+      "\ coc#refresh()
+"inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+"inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+"function! CheckBackspace() abort
+  "let col = col('.') - 1
+  "return !col || getline('.')[col - 1]  =~# '\s'
+"endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+"inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 
-command Pretty execute "!rbprettier --write %"
+command Pretty execute "!BUNDLE_GEMFILE=~/workspace/prettier.gemfile rbprettier --write %"
 
 command Test execute "tabnew % | term yarn test %"
-command Rspec execute "tabnew % | term c rspec %"
+command Rspec execute "tabnew % | term bundle exec rspec %"
+
+command Gblame execute "Git blame"
