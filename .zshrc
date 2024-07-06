@@ -71,6 +71,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
+plugins=(asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,7 +110,7 @@ export PATH=$PATH:/usr/local/bin
 export TERM="xterm-256color"
 export EDITOR='vim'
 
-[ -s "$HOME/.asdf/asdf.sh" ] && \. "$HOME/.asdf/asdf.sh" # This loads asdf
+. "$HOME/.asdf/asdf.sh"
 
 export PATH=$HOME/bin:$PATH
 

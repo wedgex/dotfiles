@@ -2,7 +2,7 @@
 	email = h.haydel@calendly.com
 	name = Hunter Haydel
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = /Users/h.haydel/.gitignore
 [push]
 	default = current

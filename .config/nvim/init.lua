@@ -173,7 +173,8 @@ require('lazy').setup({
 
   'scrooloose/nerdtree',
   'mfussenegger/nvim-lint',
-  'vim-test/vim-test'
+  'vim-test/vim-test',
+   'mattn/emmet-vim'
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -194,6 +195,10 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.bo.softtabstop = 2
 
 -- Set highlight on search
 vim.o.hlsearch = true
@@ -319,7 +324,7 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'ruby', 'lua', 'javascript', 'yaml', 'tsx', 'typescript', 'help', 'vim' },
+  ensure_installed = { 'ruby', 'lua', 'javascript', 'yaml', 'tsx', 'typescript', 'help', 'vim', 'svelte' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -437,24 +442,11 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
-local solargraph_cmd = function()
-  local ret_code = nil
-  local jid = vim.fn.jobstart("bundle info solargraph", { on_exit = function(_, data) ret_code = data end })
-  vim.fn.jobwait({ jid }, 5000)
-  if ret_code == 0 then
-    return { "bundle", "exec", "solargraph", "stdio" }
-  end
-  return { "solargraph", "stdio" }
-end
-
 local servers = {
-  solargraph = {
-    cmd = solargraph_cmd(),
-    formatting = true,
-    solargraph = {
-      diagnostics = true
-    }
-  },
+  standardrb = {},
+  ruby_lsp = {},
+  tsserver = {},
+  svelteserver = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -535,36 +527,10 @@ cmp.setup {
   },
 }
 
--- Set up lint
--- Only setting this up for ruby, the LSP works fine for other languages but the
--- Calendly ruby ecosystem screws up solargraph
-local rubocop_use_bundler = function()
-  local ret_code = nil
-  local jid = vim.fn.jobstart("bundle info rubocop", { on_exit = function(_, data) ret_code = data end })
-  vim.fn.jobwait({ jid }, 5000)
-
-  return ret_code == 0
-end
-
-local start_rubocop_server_cmd = function()
-  if rubocop_use_bundler() then
-    return 'bundle exec rubocop --start-server'
-  else
-    return 'rubocop --start-server'
-  end
-end
 local lint = require('lint')
 
-if rubocop_use_bundler() then
-  lint.linters.rubocop.cmd = "bundle"
-  lint.linters.rubocop.args = { 'exec', 'rubocop', '--server', '--format', 'json', '--force-exclusion' }
-else
-  lint.linters.rubocop.cmd = "rubocop"
-  lint.linters.rubocop.args = { '--server', '--format', 'json', '--force-exclusion' }
-end
-
 lint.linters_by_ft = {
-  ruby = { 'rubocop' }
+  ruby = { 'standardrb' }
 }
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChangedI", "BufWritePost", "BufEnter", "BufWinEnter" }, {
@@ -573,11 +539,6 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChangedI", "BufWritePost", "Bu
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter", 'BufWinEnter' }, {
-  pattern = { "*.rb" },
-  command = start_rubocop_server_cmd(),
-  once = true
-})
 
 -- vim-test
 vim.g['test#strategy'] = 'neovim'
