@@ -3,6 +3,5 @@
 DIR=$(dirname ${BASH_SOURCE[0]})
 
 ln -sv $DIR/.zshrc ~/.zshrc
-ln -sv $DIR/.oh-my-zsh ~/.oh-my-zsh
 ln -sv $DIR/.config ~/.config
 ln -sv $DIR/.gitconfig ~/.gitconfig
