@@ -445,8 +445,8 @@ end
 local servers = {
   standardrb = {},
   ruby_lsp = {},
-  tsserver = {},
-  svelteserver = {},
+  ts_ls = {},
+  svelte = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
