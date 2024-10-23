@@ -119,18 +119,7 @@ require('lazy').setup({
     end,
   },
 
-  { -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
-  },
+  'nvim-lualine/lualine.nvim',
 
   { -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
@@ -174,7 +163,8 @@ require('lazy').setup({
   'scrooloose/nerdtree',
   'mfussenegger/nvim-lint',
   'vim-test/vim-test',
-   'mattn/emmet-vim'
+  'mattn/emmet-vim',
+  'vim-test/vim-test'
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -260,7 +250,7 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
-local toggle_nerd_tree =  function()
+local toggle_nerd_tree = function()
   if vim.fn.exists('g:NERDTree') and vim.api.nvim_eval('g:NERDTree.IsOpen()') == 1 then
     vim.cmd('NERDTreeToggle')
   elseif vim.fn.expand('%') then
@@ -297,6 +287,9 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    layout_config = {
+      horizontal = { width = 0.99 }
+    }
   },
 }
 
@@ -433,7 +426,7 @@ local on_attach = function(_, bufnr)
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
+    vim.lsp.buf.format({ timeout_ms = 5000 })
   end, { desc = 'Format current buffer with LSP' })
 end
 
@@ -485,7 +478,6 @@ mason_lspconfig.setup_handlers {
 -- nvim-cmp setup
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
-
 luasnip.config.setup {}
 
 cmp.setup {
@@ -495,7 +487,7 @@ cmp.setup {
     end,
   },
   mapping = cmp.mapping.preset.insert {
-    ['<C-d>'] = cmp.mapping.scroll_docs( -4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
@@ -514,8 +506,8 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable( -1) then
-        luasnip.jump( -1)
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
       else
         fallback()
       end
@@ -550,6 +542,28 @@ if string.match(vim.fn.getcwd(), "workspaces/calendly") then
   vim.g['test#ruby#use_binstubs'] = 0
   vim.g['test#rspec#executable'] = 'c rspec'
 end
+
+require('lualine').setup {
+  options = {
+    component_separators = '',
+  },
+  sections = {
+    lualine_a = { 'mode' },
+    lualine_b = {},
+    lualine_c = { { 'filename', path = 1 } },
+    lualine_x = { 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
+    lualine_y = {},
+    lualine_z = {}
+  },
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
