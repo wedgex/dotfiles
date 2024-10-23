@@ -164,9 +164,19 @@ require('lazy').setup({
   'mfussenegger/nvim-lint',
   'vim-test/vim-test',
   'mattn/emmet-vim',
-  'vim-test/vim-test'
+  'vim-test/vim-test',
+  'tpope/vim-surround',
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim"
+    }
+  }
 
-  -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
+  -- NOTE: cccext Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
   -- require 'kickstart.plugins.autoformat',
@@ -250,17 +260,16 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 
-local toggle_nerd_tree = function()
-  if vim.fn.exists('g:NERDTree') and vim.api.nvim_eval('g:NERDTree.IsOpen()') == 1 then
-    vim.cmd('NERDTreeToggle')
-  elseif vim.fn.expand('%') then
-    vim.cmd('NERDTreeFind')
-  else
-    vim.cmd('NERDTreeToggle')
-  end
-end
+require('neo-tree').setup({
+  close_if_last_window = true,
+  follow_current_file = {
+    enabled = true
+  }
+})
 
-vim.keymap.set('n', '<leader>n', toggle_nerd_tree)
+vim.keymap.set('n', '<leader>n', function()
+  vim.cmd('Neotree toggle reveal')
+end)
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
